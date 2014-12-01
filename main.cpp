@@ -20,6 +20,8 @@ int main(int argc, char** argv) {
     //Initialisation de la partie
     Partie partie;
 
+    affichagePlateau(partie.getPlateau());
+
     return 0;
 }
 

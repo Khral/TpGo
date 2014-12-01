@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1417427871 source:c:\users\eleve\documents\tpgo\affichage.cpp
+	"affichage.h"
+
+1417427832 c:\users\eleve\documents\tpgo\affichage.h
+	<vector>
+	<iostream>
+	"definitions.h"
+
+1417427005 c:\users\eleve\documents\tpgo\definitions.h
+
+1417428163 source:c:\users\eleve\documents\tpgo\partie.cpp
+	"partie.h"
+
+1417428182 c:\users\eleve\documents\tpgo\partie.h
+	<vector>
+	"definitions.h"
+
+1417428138 source:c:\users\eleve\documents\tpgo\main.cpp
+	<cstdlib>
+	"definitions.h"
+	"partie.h"
+	"affichage.h"
+
