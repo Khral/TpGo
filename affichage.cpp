@@ -16,16 +16,14 @@ void affichagePlateau(std::vector<std::vector<int> > plateau){
     {
         for(int j=0; j<TAILLE; j++)
         {
-            if(plateau[i][j] == NULL)
-            {
+            if(plateau[i][j] == NULL){
                 cout << '.';
             }
-           if(plateau[i][j]== NOIR){
+           else if(plateau[i][j]== NOIR){
                  cout <<  "N";
            }
 
-           if(plateau[i][j]== BLANC)
-            {
+           else if(plateau[i][j]== BLANC) {
                 cout << "B";
             }
             else{
