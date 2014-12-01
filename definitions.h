@@ -10,7 +10,7 @@
 
 const int TAILLE=5;
 
-enum JOUEUR {BLANC, NOIR};
+enum Joueur {BLANC, NOIR};
 
 struct coup{
 private:

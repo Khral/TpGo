@@ -17,8 +17,11 @@ public:
     Partie();
     Partie(const Partie& orig);
     virtual ~Partie();
+    std::vector<std::vector<int> > getPlateau();
+    
 private:
     std::vector<coup> listeCoups;
+    std::vector<std::vector<int> > plateau;
 };
 
 #endif	/* PARTIE_H */

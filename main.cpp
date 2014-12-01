@@ -9,14 +9,15 @@
 #include <cstdlib>
 
 #include "definitions.h"
+#include "partie.h"
 
 using namespace std;
 
 
 int main(int argc, char** argv) {
 
-    //Initialisation du plateau
-    int plateau[TAILLE][TAILLE];
+    //Initialisation de la partie
+    Partie partie; 
     
     return 0;
 }
