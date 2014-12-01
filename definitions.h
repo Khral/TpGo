@@ -12,7 +12,7 @@ const int TAILLE=5;
 
 enum Joueur {BLANC, NOIR};
 
-struct coup{
+struct Coup{
 private:
     int joueur;
     int x;

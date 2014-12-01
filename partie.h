@@ -18,9 +18,10 @@ public:
     Partie(const Partie& orig);
     virtual ~Partie();
     std::vector<std::vector<int> > getPlateau() const;
+    bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
 
 private:
-    std::vector<coup> listeCoups;
+    std::vector<Coup> listeCoups;
     std::vector<std::vector<int> > plateau;
 };
 
