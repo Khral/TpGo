@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   definitions.h
  * Author: Etienne
  *
@@ -13,8 +13,7 @@ const int TAILLE=5;
 enum Joueur {BLANC, NOIR};
 
 struct Coup{
-private:
-    int joueur;
+    Joueur joueur;
     int x;
     int y;
 };
