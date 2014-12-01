@@ -1,0 +1,8 @@
+*.inc
+*.o
+*.d
+*.dll
+*.xml
+*.mk
+*.bash
+*.properties
