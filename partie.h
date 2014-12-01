@@ -25,11 +25,18 @@ public:
 
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
     void actualiserPlateau();
+    void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
 
 private:
     std::vector<Coup> listeCoups;
     std::vector<std::vector<std::vector<Joueur> > > listePlateaux;
     std::vector<Coup> testVivante;
+
+    int prisonniersBlanc=0;
+    int prisonniersNoir=0;
+
+    //Permet de gérer les cas où on revient en arrière
+    int prisonniersCourant;
     std::vector<std::vector<Joueur> > plateauCourant;
 };
 

@@ -6,9 +6,9 @@
  */
 
 #include "partie.h"
-#include <iostream>
 
-using namespace std;
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -18,6 +18,10 @@ Partie::Partie() {
     for(int i=0; i<TAILLE; i++)
     {
         listePlateaux[0][i].resize(TAILLE);
+        for(int j=0; j<TAILLE; j++)
+        {
+            listePlateaux[0][i][j]=RIEN;
+        }
     }
 }
 
@@ -71,15 +75,79 @@ Partie::~Partie() {
 bool Partie::jouer(Coup nouveauCoup) {
 
     //Si il y a déjà une pierre, on ne peut pas jouer
-    if(getPlateau()[nouveauCoup.x][nouveauCoup.y]!=NULL)
+    if(getPlateau()[nouveauCoup.x][nouveauCoup.y]!=RIEN)
         return false;
 
     plateauCourant = getPlateau();
     plateauCourant[nouveauCoup.x][nouveauCoup.y] = nouveauCoup.joueur;
-    testVivante.clear();
 
-    //Attention, il faut gérer les kills avant !
-    //estVivante(nouveauCoup)
+    //On regarde si on capture un truc
+    prisonniersCourant = 0;
+    Coup coupTest;
+    switch (nouveauCoup.joueur) {
+        case BLANC:
+            coupTest.joueur = NOIR;
+            break;
+        case NOIR:
+            coupTest.joueur = BLANC;
+            break;
+    }
+
+    if(nouveauCoup.x-1>=0 and plateauCourant[nouveauCoup.x-1][nouveauCoup.y]==coupTest.joueur) {
+        coupTest.x = nouveauCoup.x-1;
+        coupTest.y = nouveauCoup.y;
+
+        testVivante.clear();
+        if(!estVivante(coupTest))
+            retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
+    }
+
+    if(nouveauCoup.x+1<TAILLE and plateauCourant[nouveauCoup.x+1][nouveauCoup.y]==coupTest.joueur) {
+        coupTest.x = nouveauCoup.x+1;
+        coupTest.y = nouveauCoup.y;
+
+        testVivante.clear();
+        if(!estVivante(coupTest))
+            retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
+    }
+
+    if(nouveauCoup.y-1>=0 and plateauCourant[nouveauCoup.x][nouveauCoup.y-1]==coupTest.joueur) {
+        coupTest.x = nouveauCoup.x;
+        coupTest.y = nouveauCoup.y-1;
+
+        testVivante.clear();
+        if(!estVivante(coupTest))
+            retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
+    }
+
+    if(nouveauCoup.y+1<TAILLE and plateauCourant[nouveauCoup.x][nouveauCoup.y+1]==coupTest.joueur) {
+        coupTest.x = nouveauCoup.x;
+        coupTest.y = nouveauCoup.y+1;
+
+        testVivante.clear();
+        if(!estVivante(coupTest))
+            retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
+    }
+
+    //On regarde si on ne s'est pas suicidé
+    testVivante.clear();
+    if(!estVivante(nouveauCoup))
+        return false;
+
+    //On gère le KO
+    //A COMPLETER
+
+    //On envoie !
+    switch(nouveauCoup.joueur) {
+        case NOIR:
+            prisonniersNoir+=prisonniersCourant;
+            break;
+        case BLANC:
+            prisonniersBlanc+=prisonniersCourant;
+            break;
+    }
+    listePlateaux.push_back(plateauCourant);
+    return true;
 
 }
 
@@ -90,13 +158,13 @@ bool Partie::estVivante(Coup pierre) {
     }
     testVivante.push_back(pierre);
 
-    if(pierre.x-1>=0 and plateauCourant[pierre.x-1][pierre.y]==NULL)
+    if(pierre.x-1>=0 and plateauCourant[pierre.x-1][pierre.y]==RIEN)
         return true;
-    if(pierre.x+1<TAILLE and plateauCourant[pierre.x+1][pierre.y]==NULL)
+    if(pierre.x+1<TAILLE and plateauCourant[pierre.x+1][pierre.y]==RIEN)
         return true;
-    if(pierre.y-1>=0 and plateauCourant[pierre.x][pierre.y-1]==NULL)
+    if(pierre.y-1>=0 and plateauCourant[pierre.x][pierre.y-1]==RIEN)
         return true;
-    if(pierre.y+1<TAILLE and plateauCourant[pierre.x][pierre.y+1]==NULL)
+    if(pierre.y+1<TAILLE and plateauCourant[pierre.x][pierre.y+1]==RIEN)
         return true;
 
     Coup coupTest;
@@ -127,5 +195,19 @@ bool Partie::estVivante(Coup pierre) {
             return true;
     }
     return false;
+}
+
+void Partie::retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau) {
+    if(x-1>=0 and plateau[x-1][y]==plateau[x][y])
+        retirerGroupe(x-1, y, plateau);
+    if(x+1<TAILLE and plateau[x+1][y]==plateau[x][y])
+        retirerGroupe(x+1, y, plateau);
+    if(y-1>=0 and plateau[x][y-1]==plateau[x][y])
+        retirerGroupe(x, y-1, plateau);
+    if(y+1<TAILLE and plateau[x][y+1]==plateau[x][y])
+        retirerGroupe(x, y+1, plateau);
+
+    plateau[x][y] = RIEN;
+    prisonniersCourant++;
 }
 

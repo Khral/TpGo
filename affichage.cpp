@@ -16,7 +16,7 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
     {
         for(int j=0; j<TAILLE; j++)
         {
-            if(plateau[i][j] == NULL){
+            if(plateau[i][j] == RIEN) {
                 cout << '.';
             }
            else if(plateau[i][j]== NOIR){
