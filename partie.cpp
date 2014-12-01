@@ -8,6 +8,11 @@
 #include "partie.h"
 
 Partie::Partie() {
+    plateau.resize(TAILLE);
+    for(int i=0; i<TAILLE; i++)
+    {
+        plateau[i].resize(TAILLE);
+    }
 }
 
 Partie::Partie(const Partie& orig) {
