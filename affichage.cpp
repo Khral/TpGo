@@ -5,9 +5,11 @@
  * Created on 1 décembre 2014, 09:53
  */
 
+#include "affichage.h"
+
 using namespace std;
 
-void affichagePlateau(int plateau[TAILLE][TAILLE]){
+void affichagePlateau(std::vector<std::vector<int> > plateau){
     int i,j;
 
     for(int i=0; i<TAILLE; i++)
@@ -18,16 +20,16 @@ void affichagePlateau(int plateau[TAILLE][TAILLE]){
             {
                 cout << '.';
             }
-           if(plateau[i][j]== JOUEURNOIR){
+           if(plateau[i][j]== NOIR){
                  cout <<  "N";
            }
 
-           if(plateau[i][j]== JOUEURBLANC)
+           if(plateau[i][j]== BLANC)
             {
                 cout << "B";
             }
             else{
-                cout <<"X"; // permet de gérer le cas où
+                cout <<"X"; // permet de gérer au cas où
             }
         }
         cout << endl;

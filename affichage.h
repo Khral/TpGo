@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   affichage.h
  * Author: Etienne et Samuel
  *
@@ -8,6 +8,12 @@
 #ifndef AFFICHAGE_H
 #define	AFFICHAGE_H
 
+#include <vector>
+#include <iostream>
+#include "definitions.h"
+
+
+void affichagePlateau(std::vector<std::vector<int> > plateau);
 
 
 #endif	/* AFFICHAGE_H */

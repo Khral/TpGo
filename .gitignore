@@ -6,3 +6,5 @@
 *.mk
 *.bash
 *.properties
+TpGo/bin/Debug/TpGo.exe
+TpGo/TpGo.cbp

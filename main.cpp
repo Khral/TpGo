@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.cpp
  * Author: Etienne et Samuel
  *
@@ -10,6 +10,7 @@
 
 #include "definitions.h"
 #include "partie.h"
+#include "affichage.h"
 
 using namespace std;
 
@@ -17,8 +18,8 @@ using namespace std;
 int main(int argc, char** argv) {
 
     //Initialisation de la partie
-    Partie partie; 
-    
+    Partie partie;
+
     return 0;
 }
 
