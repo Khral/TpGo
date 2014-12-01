@@ -8,3 +8,6 @@
 *.properties
 TpGo/bin/Debug/TpGo.exe
 TpGo/TpGo.cbp
+*.exe
+TpGo.cbp
+TpGo.depend

@@ -22,7 +22,7 @@ public:
 
 private:
     std::vector<Coup> listeCoups;
-    std::vector<std::vector<int> > plateau;
+    std::vector<std::vector<std::vector<int> > > listePlateaux;
 };
 
 #endif	/* PARTIE_H */

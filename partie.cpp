@@ -8,10 +8,11 @@
 #include "partie.h"
 
 Partie::Partie() {
-    plateau.resize(TAILLE);
+    listePlateaux.resize(1);
+    listePlateaux[0].resize(TAILLE);
     for(int i=0; i<TAILLE; i++)
     {
-        plateau[i].resize(TAILLE);
+        listePlateaux[0][i].resize(TAILLE);
     }
 }
 
@@ -19,7 +20,7 @@ Partie::Partie(const Partie& orig) {
 }
 
 std::vector<std::vector<int> > Partie::getPlateau() const {
-    return plateau;
+    return listePlateaux.back();
 }
 
 Partie::~Partie() {
