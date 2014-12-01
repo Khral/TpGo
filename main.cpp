@@ -14,6 +14,23 @@
 
 using namespace std;
 
+void coupUtilisateur (Joueur){
+    Coup Coupcourrant;
+    cout << "Voulez vous passer votre tour ? O/N ";
+    char reponse;
+    cin >> reponse;
+    while ((reponse != 'O') && (reponse != 'N')){
+        cout << "Repondez avec O/N: " << endl;
+        cin >> reponse;
+    }
+    if (reponse == 'O'){
+        Coupcourrant.x=-1;
+        Coupcourrant.y=-1;
+    }
+    cin >> Coupcourrant.x ;
+    cin >> Coupcourrant.y ;
+}
+
 
 int main(int argc, char** argv) {
 
