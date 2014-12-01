@@ -1,6 +1,6 @@
 /*
  * File:   Partie.h
- * Author: eleve
+ * Author: Etienne
  *
  * Created on 1 décembre 2014, 10:26
  */
@@ -21,13 +21,15 @@ public:
     virtual ~Partie();
     std::vector<std::vector<Joueur> > getPlateau() const;
     bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
-    bool estVivante(Coup pierre);
 
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
     void actualiserPlateau();
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
 
 private:
+    bool estVivante(Coup pierre);
+    bool testKo(std::vector<std::vector<Joueur> > plateau);
+
     std::vector<Coup> listeCoups;
     std::vector<std::vector<std::vector<Joueur> > > listePlateaux;
     std::vector<Coup> testVivante;

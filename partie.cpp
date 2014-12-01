@@ -1,6 +1,6 @@
 /*
  * File:   Partie.cpp
- * Author: eleve
+ * Author: Etienne
  *
  * Created on 1 décembre 2014, 10:26
  */
@@ -135,7 +135,8 @@ bool Partie::jouer(Coup nouveauCoup) {
         return false;
 
     //On gère le KO
-    //A COMPLETER
+    if(testKo(plateauCourant))
+        return false;
 
     //On envoie !
     switch(nouveauCoup.joueur) {
@@ -209,5 +210,17 @@ void Partie::retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & pla
 
     plateau[x][y] = RIEN;
     prisonniersCourant++;
+}
+
+bool Partie::testKo(vector<vector<Joueur> > plateau){
+    for(int k=0;k<listePlateaux.size();k++){
+        for(int i=0; i<TAILLE;i++) {
+            for(int j=0;j<TAILLE;j++) {
+                if(listePlateaux[k][i][j]!=plateau[i][j])
+                    return false;
+            }
+        }
+    }
+    return true;
 }
 
