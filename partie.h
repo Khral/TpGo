@@ -20,6 +20,8 @@ public:
     std::vector<std::vector<int> > getPlateau() const;
     bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
 
+    void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
+
 private:
     std::vector<Coup> listeCoups;
     std::vector<std::vector<std::vector<int> > > listePlateaux;
