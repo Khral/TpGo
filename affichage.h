@@ -13,7 +13,7 @@
 #include "definitions.h"
 
 
-void affichagePlateau(std::vector<std::vector<int> > plateau);
+void affichagePlateau(std::vector<std::vector<Joueur> > plateau);
 
 
 #endif	/* AFFICHAGE_H */
