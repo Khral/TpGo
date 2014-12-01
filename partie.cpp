@@ -78,7 +78,7 @@ bool Partie::jouer(Coup nouveauCoup) {
     plateauCourant[nouveauCoup.x][nouveauCoup.y] = nouveauCoup.joueur;
     testVivante.clear();
 
-    //Attention, il faut gérer les kills !
+    //Attention, il faut gérer les kills avant !
     //estVivante(nouveauCoup)
 
 }
