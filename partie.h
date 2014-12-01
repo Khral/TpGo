@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 #include "definitions.h"
 
@@ -29,6 +30,7 @@ private:
     std::vector<Coup> listeCoups;
     std::vector<std::vector<std::vector<Joueur> > > listePlateaux;
     std::vector<Coup> testVivante;
+    std::vector<std::vector<Joueur> > plateauCourant;
 };
 
 #endif	/* PARTIE_H */
