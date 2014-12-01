@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void affichagePlateau(std::vector<std::vector<int> > plateau){
+void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
     int i,j;
 
     for(int i=0; i<TAILLE; i++)

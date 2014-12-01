@@ -13,10 +13,10 @@ const int TAILLE=5;
 enum Joueur {BLANC, NOIR};
 
 struct Coup{
+    //x=-1 ou y=-1 -> passer
     Joueur joueur;
     int x;
     int y;
 };
 
 #endif	/* DEFINITIONS_H */
-
