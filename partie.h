@@ -23,6 +23,7 @@ public:
     bool estVivante(Coup pierre);
 
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
+    void actualiserPlateau();
 
 private:
     std::vector<Coup> listeCoups;

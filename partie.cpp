@@ -41,20 +41,29 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
         cin >> reponse;
     }
     if (reponse == 'O'){
-        Coupcourrant.x=-1;
-        Coupcourrant.y=-1;
+        Coupcourrant.x=-1; // par convention
+        Coupcourrant.y=-1; // par convention
     }
-    cout << "Position du coup (en x):" ;
-    cin >> Coupcourrant.x ;
-    cout << "Position du coup (en y):" ;
-    cin >> Coupcourrant.y ;
-
-
+    if (reponse == 'N'){
+        bool jouable = false;
+        while (jouable == false){
+            cout << "Position du coup (en x):" ;
+            cin >> Coupcourrant.x ;
+            cout << "Position du coup (en y):" ;
+            cin >> Coupcourrant.y ;
+            jouable = jouer(Coupcourrant);
+        }
+    }
 
     // On place ces instructions dans la liste de coups
     listeCoups.push_back(Coupcourrant);
 }
 
+void Partie::actualiserPlateau() { // EN COURS
+    /*<std::vector<std::vector<Joueur> >  newPlateau;
+    listePlateaux.push_back(newPlateau)
+    */
+}
 
 Partie::~Partie() {
 }
