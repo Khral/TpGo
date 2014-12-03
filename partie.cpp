@@ -63,11 +63,6 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
     listeCoups.push_back(Coupcourrant);
 }
 
-void Partie::actualiserPlateau() { // EN COURS
-    /*<std::vector<std::vector<Joueur> >  newPlateau;
-    listePlateaux.push_back(newPlateau)
-    */
-}
 
 Partie::~Partie() {
 }
