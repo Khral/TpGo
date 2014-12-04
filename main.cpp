@@ -1,4 +1,4 @@
-/*
+﻿/*
  * File:   main.cpp
  * Author: Etienne et Samuel
  *
@@ -17,6 +17,13 @@
 #include "partie.h"
 #include "affichage.h"
 #include "affichageSDL.h"
+
+#ifdef GRAPHIQUE
+
+#include <SDL.h>
+#include <SDL_image.h>
+
+#endif // GRAPHIQUE
 
 
 using namespace std;
