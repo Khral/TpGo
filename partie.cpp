@@ -265,12 +265,96 @@ int Partie::getScoreNoir() const{
     return intersectionNoir+prisonniersNoir;
 }
 
-void Partie::compterPoints() {
+void Partie::compterPoints(int x, int y) {
+    intersectionBlanc = 0;
+    intersectionNoir = 0;
+
     for(int i=0; i<TAILLE;i++) {
         for(int j=0; j<TAILLE; j++) {
+            interCourantes.clear();
+            compterIntersections(x, y);
 
+            int nbIntersection = 0;
+            Joueur couleur = RIEN;
+            int k=0;
+            while(nbIntersection>=0){
+                switch(couleur){
+                    case RIEN:
+                        switch(interCourantes[k].joueur) {
+                            case BLANC:
+                                couleur=BLANC;
+                                break;
+                            case NOIR:
+                                couleur=NOIR;
+                                break;
+                            default:
+                                nbIntersection++;
+                                break;
+                        }
+                        break;
+                    case BLANC:
+                        switch(interCourantes[k].joueur) {
+                            case BLANC:
+                                break;
+                            case NOIR:
+                                nbIntersection=-1; //Ce qui arrête le script
+                                break;
+                            default:
+                                nbIntersection++;
+                                break;
+                        }
+                        break;
+                    case NOIR:
+                        switch(interCourantes[k].joueur) {
+                            case NOIR:
+                                break;
+                            case BLANC:
+                                nbIntersection=-1; //Ce qui arrête le script
+                                break;
+                            default:
+                                nbIntersection++;
+                                break;
+                        }
+                        break;
+                }
+            }
+            if(nbIntersection>=0){
+                switch(couleur){
+                    case NOIR:
+                        intersectionNoir+=nbIntersection;
+                        break;
+                    case BLANC:
+                        intersectionBlanc+=nbIntersection;
+                        break;
+                }
+            }
         }
     }
 }
 
+void Partie::compterIntersections(int x, int y) {
+    Coup coupTeste;
+    coupTeste.x = x;
+    coupTeste.y = y;
+    coupTeste.joueur = plateauFin[x][y];
+
+    for(int k=0; k<TAILLE; k++){
+        if(interDejaTestees[k].x==coupTeste.x && interDejaTestees[k].y==coupTeste.y)
+            return;
+    }
+    interCourantes.push_back(coupTeste);
+    interDejaTestees.push_back(coupTeste);
+
+    if(plateauFin[x][y] == BLANC || plateauFin[x][y] == NOIR)
+        return;
+
+    if(x-1>=0)
+        compterIntersections(x-1, y);
+    if(x+1<TAILLE)
+        compterIntersections(x+1, y);
+    if(y-1>=0)
+        compterIntersections(x, y-1);
+    if(y+1<TAILLE)
+        compterIntersections(x, y+1);
+}
 
