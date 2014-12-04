@@ -88,7 +88,7 @@ bool Partie::jouer(Coup nouveauCoup) {
             break;
     }
 
-    if(nouveauCoup.x-1>=0 and plateauCourant[nouveauCoup.x-1][nouveauCoup.y]==coupTest.joueur) {
+    if(nouveauCoup.x-1>=0 && plateauCourant[nouveauCoup.x-1][nouveauCoup.y]==coupTest.joueur) {
         coupTest.x = nouveauCoup.x-1;
         coupTest.y = nouveauCoup.y;
 
@@ -97,7 +97,7 @@ bool Partie::jouer(Coup nouveauCoup) {
             retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
     }
 
-    if(nouveauCoup.x+1<TAILLE and plateauCourant[nouveauCoup.x+1][nouveauCoup.y]==coupTest.joueur) {
+    if(nouveauCoup.x+1<TAILLE && plateauCourant[nouveauCoup.x+1][nouveauCoup.y]==coupTest.joueur) {
         coupTest.x = nouveauCoup.x+1;
         coupTest.y = nouveauCoup.y;
 
@@ -106,7 +106,7 @@ bool Partie::jouer(Coup nouveauCoup) {
             retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
     }
 
-    if(nouveauCoup.y-1>=0 and plateauCourant[nouveauCoup.x][nouveauCoup.y-1]==coupTest.joueur) {
+    if(nouveauCoup.y-1>=0 && plateauCourant[nouveauCoup.x][nouveauCoup.y-1]==coupTest.joueur) {
         coupTest.x = nouveauCoup.x;
         coupTest.y = nouveauCoup.y-1;
 
@@ -115,7 +115,7 @@ bool Partie::jouer(Coup nouveauCoup) {
             retirerGroupe(coupTest.x,coupTest.y, plateauCourant);
     }
 
-    if(nouveauCoup.y+1<TAILLE and plateauCourant[nouveauCoup.x][nouveauCoup.y+1]==coupTest.joueur) {
+    if(nouveauCoup.y+1<TAILLE && plateauCourant[nouveauCoup.x][nouveauCoup.y+1]==coupTest.joueur) {
         coupTest.x = nouveauCoup.x;
         coupTest.y = nouveauCoup.y+1;
 
@@ -149,42 +149,42 @@ bool Partie::jouer(Coup nouveauCoup) {
 
 bool Partie::estVivante(Coup pierre) {
     for(int i=0;i<testVivante.size();i++) {
-        if(testVivante[i].x==pierre.x and testVivante[i].y==pierre.y)
+        if(testVivante[i].x==pierre.x && testVivante[i].y==pierre.y)
             return false;
     }
     testVivante.push_back(pierre);
 
-    if(pierre.x-1>=0 and plateauCourant[pierre.x-1][pierre.y]==RIEN)
+    if(pierre.x-1>=0 && plateauCourant[pierre.x-1][pierre.y]==RIEN)
         return true;
-    if(pierre.x+1<TAILLE and plateauCourant[pierre.x+1][pierre.y]==RIEN)
+    if(pierre.x+1<TAILLE && plateauCourant[pierre.x+1][pierre.y]==RIEN)
         return true;
-    if(pierre.y-1>=0 and plateauCourant[pierre.x][pierre.y-1]==RIEN)
+    if(pierre.y-1>=0 && plateauCourant[pierre.x][pierre.y-1]==RIEN)
         return true;
-    if(pierre.y+1<TAILLE and plateauCourant[pierre.x][pierre.y+1]==RIEN)
+    if(pierre.y+1<TAILLE && plateauCourant[pierre.x][pierre.y+1]==RIEN)
         return true;
 
     Coup coupTest;
     coupTest.joueur = pierre.joueur;
 
-    if(pierre.x-1>=0 and plateauCourant[pierre.x-1][pierre.y]==pierre.joueur) {
+    if(pierre.x-1>=0 && plateauCourant[pierre.x-1][pierre.y]==pierre.joueur) {
         coupTest.x = pierre.x-1;
         coupTest.y = pierre.y;
         if(estVivante(coupTest))
             return true;
     }
-    if(pierre.x+1<TAILLE and plateauCourant[pierre.x+1][pierre.y]==pierre.joueur) {
+    if(pierre.x+1<TAILLE && plateauCourant[pierre.x+1][pierre.y]==pierre.joueur) {
         coupTest.x = pierre.x+1;
         coupTest.y = pierre.y;
         if(estVivante(coupTest))
             return true;
     }
-    if(pierre.y-1>=0 and plateauCourant[pierre.x][pierre.y-1]==pierre.joueur) {
+    if(pierre.y-1>=0 && plateauCourant[pierre.x][pierre.y-1]==pierre.joueur) {
         coupTest.x = pierre.x;
         coupTest.y = pierre.y-1;
         if(estVivante(coupTest))
             return true;
     }
-    if(pierre.y+1<TAILLE and plateauCourant[pierre.x][pierre.y+1]==pierre.joueur) {
+    if(pierre.y+1<TAILLE && plateauCourant[pierre.x][pierre.y+1]==pierre.joueur) {
         coupTest.x = pierre.x;
         coupTest.y = pierre.y+1;
         if(estVivante(coupTest))
@@ -194,13 +194,13 @@ bool Partie::estVivante(Coup pierre) {
 }
 
 void Partie::retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau) {
-    if(x-1>=0 and plateau[x-1][y]==plateau[x][y])
+    if(x-1>=0 && plateau[x-1][y]==plateau[x][y])
         retirerGroupe(x-1, y, plateau);
-    if(x+1<TAILLE and plateau[x+1][y]==plateau[x][y])
+    if(x+1<TAILLE && plateau[x+1][y]==plateau[x][y])
         retirerGroupe(x+1, y, plateau);
-    if(y-1>=0 and plateau[x][y-1]==plateau[x][y])
+    if(y-1>=0 && plateau[x][y-1]==plateau[x][y])
         retirerGroupe(x, y-1, plateau);
-    if(y+1<TAILLE and plateau[x][y+1]==plateau[x][y])
+    if(y+1<TAILLE && plateau[x][y+1]==plateau[x][y])
         retirerGroupe(x, y+1, plateau);
 
     plateau[x][y] = RIEN;
