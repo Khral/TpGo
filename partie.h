@@ -20,10 +20,13 @@ public:
     Partie(const Partie& orig);
     virtual ~Partie();
     std::vector<std::vector<Joueur> > getPlateau() const;
+    std::vector<std::vector<Joueur> > getPlateauFin();
     bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
 
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
+    void rendrePrisonniers(int x, int y);
+
 
 private:
     bool estVivante(Coup pierre);
@@ -32,8 +35,9 @@ private:
     std::vector<Coup> listeCoups;
     std::vector<std::vector<std::vector<Joueur> > > listePlateaux;
     std::vector<Coup> testVivante;
+    std::vector<std::vector<Joueur> > plateauFin;
 
-    int prisonniersBlanc=0;
+    int prisonniersBlanc=0; //Nombre de prisonniers de Blanc
     int prisonniersNoir=0;
 
     //Permet de gérer les cas où on revient en arrière

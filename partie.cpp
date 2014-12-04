@@ -26,6 +26,7 @@ Partie::Partie() {
 }
 
 Partie::Partie(const Partie& orig) {
+
 }
 
 std::vector<std::vector<Joueur> > Partie::getPlateau() const {
@@ -65,6 +66,7 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
 
 
 Partie::~Partie() {
+
 }
 
 bool Partie::jouer(Coup nouveauCoup) {
@@ -219,3 +221,36 @@ bool Partie::testKo(vector<vector<Joueur> > plateau){
     return true;
 }
 
+
+vector<vector<Joueur> > Partie::getPlateauFin() {
+    try {
+        return plateauFin;
+    }
+    catch (...){
+        plateauFin = getPlateau();
+        return plateauFin;
+    }
+}
+
+void Partie::rendrePrisonniers(int x, int y) {
+    Joueur couleur = plateauFin[x][y];
+    switch(couleur){
+        case BLANC:
+            plateauFin[x][y] = PRISO_BLANC;
+            prisonniersNoir++;
+            break;
+        case NOIR:
+            plateauFin[x][y] = PRISO_NOIR;
+            prisonniersBlanc++;
+            break;
+    }
+
+    if(x-1>=0 && plateauFin[x-1][y]==couleur)
+        rendrePrisonniers(x-1, y);
+    if(x+1<TAILLE && plateauFin[x+1][y]==couleur)
+        rendrePrisonniers(x+1, y);
+    if(y-1>=0 && plateauFin[x][y-1]==couleur)
+        rendrePrisonniers(x, y-1);
+    if(y+1<TAILLE && plateauFin[x][y+1]==couleur)
+        rendrePrisonniers(x, y+1);
+}

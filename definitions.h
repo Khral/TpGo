@@ -10,7 +10,7 @@
 
 const int TAILLE=5;
 
-enum Joueur {BLANC, NOIR, RIEN};
+enum Joueur {BLANC, NOIR, RIEN, PRISO_BLANC, PRISO_NOIR, POINT_BLANC, POINT_NOIR};
 
 struct Coup{
     //x=-1 ou y=-1 -> passer
