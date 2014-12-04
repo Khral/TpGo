@@ -8,7 +8,13 @@
 #ifndef DEFINITIONS_H
 #define	DEFINITIONS_H
 
-const int TAILLE=5;
+const int TAILLE=19;
+
+const int WIDTH = 453;
+const int HEIGHT = 453;
+const int MARGIN = 10;
+const int CASE = 24;
+const int TRAIT = 1;
 
 enum Joueur {BLANC, NOIR, RIEN, PRISO_BLANC, PRISO_NOIR, POINT_BLANC, POINT_NOIR};
 
