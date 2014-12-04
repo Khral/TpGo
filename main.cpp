@@ -29,7 +29,7 @@
 using namespace std;
 
 
-/*
+
 int main(int argc, char** argv) {
 
    //Initialisation de la partie
@@ -37,8 +37,9 @@ int main(int argc, char** argv) {
     affichagePlateau(partie.getPlateau());
 
     // Boucle de jeu
-    int k=0;
-    while (k<15){ // remplacer par une condition de fin de partie
+    int k = partie.getPassesConsecutifs();
+    while (k < 2){ // remplacer par une condition de fin de partie
+        cout << "Nombre de passes: " << partie.getPassesConsecutifs() << endl;
         if (k%2==0){
             cout << "Au joueur noir de jouer: " ;
             partie.coupUtilisateur(NOIR);
@@ -49,16 +50,16 @@ int main(int argc, char** argv) {
             partie.coupUtilisateur(BLANC);
             affichagePlateau(partie.getPlateau());
         }
-        k++;
+        k = partie.getPassesConsecutifs();
     }
     return 0;
 }
-*/
+
 
 
 /* MAIN GRAPHIQUE TEST */
 
-
+/*
  void pause();
 
 void pause(){
@@ -112,21 +113,43 @@ int main ( int argc, char** argv ){
     ecran = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE);
     SDL_WM_SetCaption("Jeu de Go - LIEVIN-PEILLARD-PETIT-TRESONTANI", NULL);
 
-    //Test chargement d'images PNG ET BMP dans une surface
+
+    // Boucle de jeu
+    int k=0;
     imageDeFond = SDL_LoadBMP("Images\\terrain.bmp");
+    while (k<15){ // remplacer par une condition de fin de partie
+            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+        if (k%2==0){
+            cout << "Au joueur noir de jouer: " ;
+            partie.coupUtilisateur(NOIR);
+            affichagePlateauSDL(partie.getPlateau(), ecran);
+            //affichagePlateau(partie.getPlateau());
+        }
+        else {
+            cout << "Au joueur blanc de jouer: " ;
+            partie.coupUtilisateur(BLANC);
+            //affichagePlateau(partie.getPlateau());
+            affichagePlateauSDL(partie.getPlateau(), ecran);
+        }
+        k++;
+    }
 
-    affichagePlateauSDL(partie.getPlateau(), ecran);
 
-    gonoir = IMG_Load("Images\\gonoir.png");
-    goblanc= IMG_Load("Images\\goblanc.png");
-    gonoirprison = IMG_Load("Images\\gonoir.png");
-    goblancprison = IMG_Load("Images\\goblanc.png");
+    //Test chargement d'images PNG ET BMP dans une surface
+
+
+
+
+    //gonoir = IMG_Load("Images\\gonoir.png");
+    //goblanc= IMG_Load("Images\\goblanc.png");
+    //gonoirprison = IMG_Load("Images\\gonoir.png");
+    //goblancprison = IMG_Load("Images\\goblanc.png");
 
     // On blitte par-dessus l'écran
 
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-    SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
-    SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
+    //SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
+    //SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
 
     SDL_Flip(ecran);
     pause();
@@ -136,4 +159,6 @@ int main ( int argc, char** argv ){
 
     return 0;
 }
+
+*/
 

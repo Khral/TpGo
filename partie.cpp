@@ -33,6 +33,10 @@ std::vector<std::vector<Joueur> > Partie::getPlateau() const {
     return listePlateaux.back();
 }
 
+int Partie::getPassesConsecutifs() const {
+    return passesConsecutifs;
+}
+
 void Partie::coupUtilisateur (Joueur jouerCourrant){
 
     // On enregistre les instructions
@@ -48,6 +52,7 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
     if (reponse == 'O'){
         Coupcourrant.x=-1; // par convention
         Coupcourrant.y=-1; // par convention
+        passesConsecutifs += 1;
     }
     if (reponse == 'N'){
         bool jouable = false;
@@ -58,6 +63,7 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
             cin >> Coupcourrant.y ;
             jouable = jouer(Coupcourrant);
         }
+        passesConsecutifs = 0;
     }
 
     // On place ces instructions dans la liste de coups

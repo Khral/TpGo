@@ -28,6 +28,7 @@ public:
     void rendrePrisonniers(int x, int y);
     int getScoreBlanc() const;
     int getScoreNoir() const;
+    int getPassesConsecutifs() const;
 
     void compterPoints(int x, int y);
     void compterIntersections(int x, int y);
@@ -49,6 +50,8 @@ private:
     std::vector<std::vector<Joueur> > plateauCourant;
     int intersectionBlanc=0;
     int intersectionNoir=0;
+
+    int passesConsecutifs; // Détecte la fin du jeu
 
     std::vector<Coup> interDejaTestees;
     std::vector<Coup> interCourantes;
