@@ -254,3 +254,23 @@ void Partie::rendrePrisonniers(int x, int y) {
     if(y+1<TAILLE && plateauFin[x][y+1]==couleur)
         rendrePrisonniers(x, y+1);
 }
+
+int Partie::getScoreBlanc() const{
+
+    return intersectionBlanc+prisonniersBlanc;
+}
+
+int Partie::getScoreNoir() const{
+
+    return intersectionNoir+prisonniersNoir;
+}
+
+void Partie::compterPoints() {
+    for(int i=0; i<TAILLE;i++) {
+        for(int j=0; j<TAILLE; j++) {
+
+        }
+    }
+}
+
+

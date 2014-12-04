@@ -26,7 +26,9 @@ public:
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
     void rendrePrisonniers(int x, int y);
-
+    void compterPoints();
+    int getScoreBlanc() const;
+    int getScoreNoir() const;
 
 private:
     bool estVivante(Coup pierre);
@@ -43,6 +45,11 @@ private:
     //Permet de gérer les cas où on revient en arrière
     int prisonniersCourant;
     std::vector<std::vector<Joueur> > plateauCourant;
+    int intersectionBlanc=0;
+    int intersectionNoir=0;
+
+    std::vector<Coup> interDejaTestees;
+    std::vector<Coup> interCourantes;
 };
 
 #endif	/* PARTIE_H */
