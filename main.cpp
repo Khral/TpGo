@@ -5,12 +5,19 @@
  * Created on 1 décembre 2014, 09:42
  */
 
+#define GRAPHIQUE 1
+//Mettre 0 ou 1
 
 #include <cstdlib>
 
 #include "definitions.h"
 #include "partie.h"
 #include "affichage.h"
+
+#ifdef GRAPHIQUE
+
+
+#endif // GRAPHIQUE
 
 using namespace std;
 
