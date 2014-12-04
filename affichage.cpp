@@ -33,9 +33,7 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
         cout << endl;
     }
     cout << endl;
-
-
-
+    cout << endl;
 }
 
 

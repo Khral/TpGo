@@ -12,19 +12,20 @@
 #include "partie.h"
 #include "affichage.h"
 
+
 using namespace std;
 
 
 
 int main(int argc, char** argv) {
 
-    //Initialisation de la partie
+   //Initialisation de la partie
     Partie partie;
     affichagePlateau(partie.getPlateau());
 
     // Boucle de jeu
     int k=0;
-    while (k<10){ // remplacer par une condition de fin de partie
+    while (k<15){ // remplacer par une condition de fin de partie
         if (k%2==0){
             cout << "Au joueur noir de jouer: " ;
             partie.coupUtilisateur(NOIR);
