@@ -29,7 +29,7 @@
 using namespace std;
 
 
-
+/*
 int main(int argc, char** argv) {
 
    //Initialisation de la partie
@@ -54,12 +54,12 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
-
+*/
 
 
 /* MAIN GRAPHIQUE TEST */
 
-/*
+
  void pause();
 
 void pause(){
@@ -117,7 +117,7 @@ int main ( int argc, char** argv ){
     // Boucle de jeu
     int k=0;
     imageDeFond = SDL_LoadBMP("Images\\terrain.bmp");
-    while (k<15){ // remplacer par une condition de fin de partie
+    /*while (k<15){ // remplacer par une condition de fin de partie
             SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
         if (k%2==0){
             cout << "Au joueur noir de jouer: " ;
@@ -132,7 +132,7 @@ int main ( int argc, char** argv ){
             affichagePlateauSDL(partie.getPlateau(), ecran);
         }
         k++;
-    }
+    }*/
 
 
     //Test chargement d'images PNG ET BMP dans une surface
@@ -160,5 +160,5 @@ int main ( int argc, char** argv ){
     return 0;
 }
 
-*/
+
 
