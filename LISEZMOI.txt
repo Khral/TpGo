@@ -1,0 +1,3 @@
+Bibliothèques utilisées : 
+- SDL 1.2.15
+- SDL_Image
