@@ -23,6 +23,7 @@ public:
     bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
 
     void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
+    void actualiserPlateau();
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
 
 private:
