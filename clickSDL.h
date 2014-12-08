@@ -17,7 +17,7 @@
 //gérer les clics
 
 
-coup clickSDL();
+Coup clickSDL();
 
 void ancrage(int &xint, int &yint); // permet de placer les pions aux intersections
 

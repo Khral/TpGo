@@ -58,13 +58,7 @@ void affichagePlateauSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface 
             }
         }
     }
-    SDL_Flip(ecran);#include <SDL.h>
-#include <SDL_image.h>
-#include <vector>
-
-#include "definitions.h"
-#include "partie.h"
-#include "affichageSDL.h"
+    SDL_Flip(ecran);
 }
 
 void affichagePlateauFinSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface *ecran){
