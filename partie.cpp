@@ -5,10 +5,17 @@
  * Created on 1 décembre 2014, 10:26
  */
 
-#include "partie.h"
 
+#include <SDL.h>
+#include <SDL_image.h>
+#include <vector>
 #include <iostream>
 #include <algorithm>
+
+
+#include "definitions.h"
+#include "partie.h"
+#include "clickSDL.h"
 
 using namespace std;
 
@@ -37,11 +44,11 @@ int Partie::getPassesConsecutifs() const {
     return passesConsecutifs;
 }
 
-void Partie::coupUtilisateur (Joueur jouerCourrant){
+void Partie::coupUtilisateur (Joueur joueurCourrant){
 
     // On enregistre les instructions
     Coup Coupcourrant;
-    Coupcourrant.joueur = jouerCourrant;
+    Coupcourrant.joueur = joueurCourrant;
     cout << "Voulez vous passer votre tour ? O/N ";
     char reponse;
     cin >> reponse;
@@ -70,6 +77,42 @@ void Partie::coupUtilisateur (Joueur jouerCourrant){
     listeCoups.push_back(Coupcourrant);
 }
 
+
+void Partie::clickSDL(Joueur joueurCourrant, Coup nouveaucoup){
+    SDL_Event event;
+    bool continuer;
+    nouveaucoup.joueur = joueurCourrant;
+
+    while (continuer){
+        SDL_WaitEvent(&event);
+        switch(event.type){
+
+        // clavier
+            case SDL_QUIT: // si on veutbquitter
+                continuer = 0;
+                break;
+            case SDLK_SPACE: // si on veut passer
+                continuer = 1;
+                nouveaucoup.x = -1;
+                nouveaucoup.y = -1;
+                break;
+
+        // souris
+            case SDL_MOUSEBUTTONUP:
+                if (event.button.button == SDL_BUTTON_LEFT) // si on veut jouer
+                    continuer = 1;
+                    nouveaucoup.x = event.button.x;
+                    nouveaucoup.y = event.button.y;
+                break;
+                if (event.button.button == SDL_BUTTON_RIGHT) // si on veut passer
+                    continuer = 1;
+                    nouveaucoup.x = -1;
+                    nouveaucoup.y = -1;
+                break;
+        }
+    }
+    listeCoups.push_back(nouveaucoup);
+}
 
 Partie::~Partie() {
 

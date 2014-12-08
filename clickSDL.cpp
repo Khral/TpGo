@@ -6,6 +6,9 @@
  */
 
 
+
+// N EST PLUS UTILISE CAR DEPLACE DANS PARTIE
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <vector>
@@ -14,12 +17,11 @@
 #include "partie.h"
 #include "clickSDL.h"
 
- // déclaration d'un évènement
-// SDL_WaitEvent: bloque l'execution tant qu'aucun évènement ne se produit
-
-Coup clickSDL(){
+/*
+Coup clickSDL(Joueur joueurCourrant){
     SDL_Event event;
     Coup nouveaucoup;
+    nouveaucoup.joueur = joueurCourrant;
     bool continuer;
 
     while (continuer){
@@ -32,16 +34,21 @@ Coup clickSDL(){
                 break;
             case SDLK_SPACE: // si on veut passer
                 continuer = 1;
+                nouveaucoup.x = -1;
+                nouveaucoup.y = -1;
                 break;
 
         // souris
             case SDL_MOUSEBUTTONUP:
                 if (event.button.button == SDL_BUTTON_LEFT) // si on veut jouer
+                    continuer = 1;
                     nouveaucoup.x = event.button.x;
                     nouveaucoup.y = event.button.y;
                 break;
                 if (event.button.button == SDL_BUTTON_RIGHT) // si on veut passer
                     continuer = 1;
+                    nouveaucoup.x = -1;
+                    nouveaucoup.y = -1;
                 break;
         }
     }
@@ -51,4 +58,4 @@ Coup clickSDL(){
 void ancrage(int &xint, int &yint){
 
 
-}
+}*/

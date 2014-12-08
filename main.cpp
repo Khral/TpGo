@@ -17,6 +17,7 @@
 #include "partie.h"
 #include "affichage.h"
 #include "affichageSDL.h"
+#include "clickSDL.h"
 
 #ifdef GRAPHIQUE
 
@@ -28,6 +29,8 @@
 
 using namespace std;
 
+
+/* MAIN AFFICHAGE TEXTE */
 
 /*
 int main(int argc, char** argv) {
@@ -62,7 +65,7 @@ int main(int argc, char** argv) {
 
  void pause();
 
-void pause(){
+void pause(){ // fonction déjà comprise dans clickSDL
     int continuer = 1;
     SDL_Event event;
 
@@ -73,7 +76,9 @@ void pause(){
         {
             case SDL_QUIT:
                 continuer = 0;
+                break;
         }
+
     }
 }
 
@@ -81,21 +86,9 @@ void pause(){
 
 int main ( int argc, char** argv ){
 
-
-   //Fonction d'initialisation (chargement des surfaces)
-        //bool init();
-
-        //Gestion du jeu lors d'un clic
-        //void clic(int , int);
-
-        //Fonction d'affichage
-        //void aff(SDL_Surface *screen);
-
-
     SDL_Surface *ecran = NULL, *imageDeFond = NULL;
     SDL_Surface *goblanc = NULL, *gonoir = NULL, *goblancprison = NULL, *gonoirprison = NULL;
     SDL_Rect positionFond, positiongonoir, positiongoblanc;
-
 
     // placement initial
     positionFond.x = 0;
@@ -109,50 +102,45 @@ int main ( int argc, char** argv ){
     Partie partie;
 
     SDL_Init(SDL_INIT_VIDEO);
-
     ecran = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE);
     SDL_WM_SetCaption("Jeu de Go - LIEVIN-PEILLARD-PETIT-TRESONTANI", NULL);
-
+    imageDeFond = SDL_LoadBMP("Images\\terrain.bmp");
 
     // Boucle de jeu
     int k=0;
-    imageDeFond = SDL_LoadBMP("Images\\terrain.bmp");
-    /*while (k<15){ // remplacer par une condition de fin de partie
-            SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
+    SDL_Flip(ecran);
+    while (k<15){ // remplacer par une condition de fin de partie
+        Coup coupCourrant;
         if (k%2==0){
-            cout << "Au joueur noir de jouer: " ;
-            partie.coupUtilisateur(NOIR);
+            //cout << "Au joueur noir de jouer: " ;
+            partie.clickSDL(NOIR, coupCourrant);
             affichagePlateauSDL(partie.getPlateau(), ecran);
-            //affichagePlateau(partie.getPlateau());
+
         }
         else {
-            cout << "Au joueur blanc de jouer: " ;
-            partie.coupUtilisateur(BLANC);
-            //affichagePlateau(partie.getPlateau());
+            //cout << "Au joueur blanc de jouer: " ;
+            partie.clickSDL(BLANC, coupCourrant);
             affichagePlateauSDL(partie.getPlateau(), ecran);
+
         }
         k++;
-    }*/
-
+    }
 
     //Test chargement d'images PNG ET BMP dans une surface
-
-
-
-
-    //gonoir = IMG_Load("Images\\gonoir.png");
-    //goblanc= IMG_Load("Images\\goblanc.png");
-    //gonoirprison = IMG_Load("Images\\gonoir.png");
-    //goblancprison = IMG_Load("Images\\goblanc.png");
+        //gonoir = IMG_Load("Images\\gonoir.png");
+        //goblanc= IMG_Load("Images\\goblanc.png");
+        //gonoirprison = IMG_Load("Images\\gonoir.png");
+        //goblancprison = IMG_Load("Images\\goblanc.png");
 
     // On blitte par-dessus l'écran
 
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-    //SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
-    //SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
+    SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
+    SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
 
-    SDL_Flip(ecran);
-    pause();
+    //SDL_Flip(ecran);
+    //pause();
 
     SDL_FreeSurface(imageDeFond); // On libère la surface
     SDL_Quit();

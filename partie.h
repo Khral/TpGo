@@ -33,6 +33,12 @@ public:
     void compterPoints(int x, int y);
     void compterIntersections(int x, int y);
 
+
+    // Affichage SDL
+    void clickSDL(Joueur joueurCourrant, Coup coupcourrant);
+
+
+
 private:
     bool estVivante(Coup pierre);
     bool testKo(std::vector<std::vector<Joueur> > plateau);

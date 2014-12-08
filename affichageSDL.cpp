@@ -24,6 +24,7 @@ SDL_Rect conversionPosition(int xin, int yin){
 }
 
 void affichagePlateauSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface *ecran){
+    SDL_FreeSurface(ecran);
 
     // initialisation des paramètres
     vector<SDL_Surface> imagesGoblanc;
@@ -59,6 +60,7 @@ void affichagePlateauSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface 
         }
     }
     SDL_Flip(ecran);
+
 }
 
 void affichagePlateauFinSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface *ecran){
