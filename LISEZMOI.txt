@@ -1,3 +1,4 @@
 Bibliothèques utilisées : 
 - SDL 1.2.15
 - SDL_Image
+- SDL_ttf http://www.libsdl.org/projects/SDL_ttf/release-1.2.html

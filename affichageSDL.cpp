@@ -23,6 +23,31 @@ SDL_Rect conversionPosition(int xin, int yin){
     return position;
 }
 
+
+
+pos conversionPos(int xin, int yin){ // NE MARCHE PAS // Sensé désigner l'intersection la plus proche
+    // k: MARGIN + TRAIT + (CASE + TRAIT)*k
+    pos position;
+    int prochex, prochey, diffx, diffy;
+    prochex = 1000;
+    prochey = 1000;
+    for (int i=0; i<19; i++){
+        diffx = xin - (MARGIN + TRAIT + (CASE + TRAIT)*i);
+        diffx = abs(diffx);
+        diffy = xin - (MARGIN + TRAIT + (CASE + TRAIT)*i);
+        diffy = abs(diffy);
+        if (diffx < prochex){
+            prochex = diffx;
+        }
+        if (diffy < prochey){
+            prochey = diffy;
+        }
+    }
+    position.xpos = prochex;
+    position.ypos = prochey;
+    return position;
+}
+
 void affichagePlateauSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface *ecran){
     SDL_FreeSurface(ecran);
 

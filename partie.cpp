@@ -16,6 +16,7 @@
 #include "definitions.h"
 #include "partie.h"
 #include "clickSDL.h"
+#include "affichageSDL.h"
 
 using namespace std;
 
@@ -99,10 +100,12 @@ void Partie::clickSDL(Joueur joueurCourrant, Coup nouveaucoup){
 
         // souris
             case SDL_MOUSEBUTTONUP:
+                pos position;
                 if (event.button.button == SDL_BUTTON_LEFT) // si on veut jouer
                     continuer = 1;
-                    nouveaucoup.x = event.button.x;
-                    nouveaucoup.y = event.button.y;
+                    position = conversionPos(event.button.x-5, event.button.y-5);
+                    nouveaucoup.x = position.xpos;
+                    nouveaucoup.y = position.ypos;
                 break;
                 if (event.button.button == SDL_BUTTON_RIGHT) // si on veut passer
                     continuer = 1;

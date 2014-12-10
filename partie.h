@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <SDL_ttf.h>
 
 #include "definitions.h"
 
