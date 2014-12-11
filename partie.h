@@ -25,8 +25,8 @@ public:
 
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
     void rendrePrisonniers(int x, int y);
-    int getScoreBlanc() const;
-    int getScoreNoir() const;
+    int getScoreBlanc();
+    int getScoreNoir();
     int getPassesConsecutifs() const;
 
     void compterPoints();

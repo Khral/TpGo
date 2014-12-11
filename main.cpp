@@ -113,9 +113,7 @@ int main(int argc, char** argv) {
         cout << "Blanc gagne" << endl;
     else
         cout << "Noir gagne" << endl;
-
     #endif // GRAPHIQUE
-	cout << "yolo" << endl;	
 	system("pause");
 	::testing::InitGoogleTest(&argc, argv);
 	
