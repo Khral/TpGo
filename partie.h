@@ -41,16 +41,16 @@ private:
     std::vector<Coup> testVivante;
     std::vector<std::vector<Joueur> > plateauFin;
 
-    int prisonniersBlanc=0; //Nombre de prisonniers de Blanc
-    int prisonniersNoir=0;
+    int prisonniersBlanc; //Nombre de prisonniers de Blanc
+    int prisonniersNoir;
 
     //Permet de gérer les cas où on revient en arrière
     int prisonniersCourant;
     std::vector<std::vector<Joueur> > plateauCourant;
-    int intersectionBlanc=0;
-    int intersectionNoir=0;
+    int intersectionBlanc;
+    int intersectionNoir;
 
-    int passesConsecutifs = 0; // Détecte la fin du jeu
+    int passesConsecutifs; // Détecte la fin du jeu
 
     std::vector<Coup> interDejaTestees;
     std::vector<Coup> interCourantes;

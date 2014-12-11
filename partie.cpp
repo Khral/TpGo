@@ -17,6 +17,14 @@
 using namespace std;
 
 Partie::Partie() {
+    prisonniersBlanc=0;
+    prisonniersNoir=0;
+
+    intersectionBlanc=0;
+    intersectionNoir=0;
+
+    passesConsecutifs = 0;
+
     listePlateaux.resize(1);
     listePlateaux[0].resize(TAILLE);
     for(int i=0; i<TAILLE; i++)
