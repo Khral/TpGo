@@ -115,10 +115,13 @@ int main(int argc, char** argv) {
         cout << "Noir gagne" << endl;
 
     #endif // GRAPHIQUE
-
+	cout << "yolo" << endl;	
 	system("pause");
+	::testing::InitGoogleTest(&argc, argv);
+	
 
     return RUN_ALL_TESTS();
+	
 }
 
 
