@@ -8,6 +8,8 @@
 #define GRAPHIQUE 0
 //Mettre 0 ou 1
 
+#include "windows.h"
+#include "gtest\gtest.h"
 #include <cstdlib>
 
 #include "definitions.h"
@@ -26,11 +28,14 @@
 using namespace std;
 
 
+
 int main(int argc, char** argv) {
 
    //Initialisation de la partie
     Partie partie;
     Joueur joueur = NOIR;
+
+	//RUN_ALL_TESTS();
 
     #if GRAPHIQUE
     SDL_Surface *ecran = NULL, *imageDeFond = NULL;
@@ -108,9 +113,12 @@ int main(int argc, char** argv) {
         cout << "Blanc gagne" << endl;
     else
         cout << "Noir gagne" << endl;
+
     #endif // GRAPHIQUE
 
-    return 0;
+	system("pause");
+
+    return RUN_ALL_TESTS();
 }
 
 

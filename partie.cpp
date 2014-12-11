@@ -56,7 +56,7 @@ Partie::~Partie() {
 
 bool Partie::jouer(Coup nouveauCoup) {
     //Si on veut passer on passe
-    if(nouveauCoup.x<0 or nouveauCoup.y<0) {
+    if(nouveauCoup.x<0 || nouveauCoup.y<0) {
         passesConsecutifs++;
         return true;
     }
