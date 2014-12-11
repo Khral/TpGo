@@ -108,6 +108,7 @@ int main(int argc, char** argv) {
         cout << "Blanc gagne" << endl;
     else
         cout << "Noir gagne" << endl;
+    system("pause");
     #endif // GRAPHIQUE
 
     return 0;

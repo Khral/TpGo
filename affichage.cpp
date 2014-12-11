@@ -54,7 +54,7 @@ void coupUtilisateur (Partie &partie, Joueur joueurCourant){
     }
     if (reponse == 'N'){
         bool jouable = false;
-        while (jouable == false){
+        while (jouable == false){ //Attention à la gestion des chiffres en entrée !
             cout << "Position du coup (en x):" ;
             cin >> coupCourant.x ;
             cout << "Position du coup (en y):" ;

@@ -61,6 +61,10 @@ bool Partie::jouer(Coup nouveauCoup) {
         return true;
     }
 
+    //ON MET LES PIERRES SUR LE PLATEAU ET PAS A COTE
+    if(nouveauCoup.x<0 || nouveauCoup.x>=TAILLE || nouveauCoup.y<0 || nouveauCoup.y>=TAILLE)
+        return false;
+
     //Si il y a déjà une pierre, on ne peut pas jouer
     if(getPlateau()[nouveauCoup.x][nouveauCoup.y]!=RIEN)
         return false;
@@ -214,10 +218,9 @@ bool Partie::testKo(vector<vector<Joueur> > plateau){
 
 
 vector<vector<Joueur> > Partie::getPlateauFin() {
-    try {
+    if(plateauFin.size()>0)
         return plateauFin;
-    }
-    catch (...){
+    else {
         plateauFin = getPlateau();
         return plateauFin;
     }
@@ -246,13 +249,13 @@ void Partie::rendrePrisonniers(int x, int y) {
         rendrePrisonniers(x, y+1);
 }
 
-int Partie::getScoreBlanc() const{
-    void compterPoints();
+int Partie::getScoreBlanc() {
+    compterPoints();
     return intersectionBlanc+prisonniersBlanc;
 }
 
-int Partie::getScoreNoir() const{
-    void compterPoints();
+int Partie::getScoreNoir() {
+    compterPoints();
     return intersectionNoir+prisonniersNoir;
 }
 
@@ -268,7 +271,7 @@ void Partie::compterPoints() {
             int nbIntersection = 0;
             Joueur couleur = RIEN;
             int k=0;
-            while(nbIntersection>=0){
+            while(nbIntersection>=0 && k<interCourantes.size()){
                 switch(couleur){
                     case RIEN:
                         switch(interCourantes[k].joueur) {
@@ -308,6 +311,7 @@ void Partie::compterPoints() {
                         }
                         break;
                 }
+                k++;
             }
             if(nbIntersection>=0){
                 switch(couleur){
@@ -327,10 +331,15 @@ void Partie::compterIntersections(int x, int y) {
     Coup coupTeste;
     coupTeste.x = x;
     coupTeste.y = y;
-    coupTeste.joueur = plateauFin[x][y];
+    coupTeste.joueur = getPlateauFin()[x][y];
 
-    for(int k=0; k<TAILLE; k++){
-        if(interDejaTestees[k].x==coupTeste.x && interDejaTestees[k].y==coupTeste.y && interDejaTestees[k].joueur == RIEN)
+    int k;
+    for(k=0; k<interDejaTestees.size(); k++){
+        if(interDejaTestees[k].x==coupTeste.x && interDejaTestees[k].y==coupTeste.y && (interDejaTestees[k].joueur == RIEN || interDejaTestees[k].joueur == PRISO_BLANC || interDejaTestees[k].joueur == PRISO_NOIR))
+            return;
+    }
+    for(k=0; k<interCourantes.size(); k++){
+        if(interCourantes[k].x==coupTeste.x && interCourantes[k].y==coupTeste.y)
             return;
     }
     interCourantes.push_back(coupTeste);
