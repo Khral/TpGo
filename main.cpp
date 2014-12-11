@@ -7,7 +7,7 @@
 
 #define GRAPHIQUE 1
 //Mettre 0 ou 1
-
+#include <gtest.h>
 #include <cstdlib>
 
 #include <SDL.h>
@@ -65,10 +65,10 @@ int main(int argc, char** argv) {
 
  void pause();
 
-void pause(){ // fonction déjà comprise dans clickSDL
+void pause(SDL_Rect positiongonoir, SDL_Surface *ecran){ // test des clicks
     int continuer = 1;
     SDL_Event event;
-
+    int k = 0;
     while (continuer)
     {
         SDL_WaitEvent(&event);
@@ -77,6 +77,28 @@ void pause(){ // fonction déjà comprise dans clickSDL
             case SDL_QUIT:
                 continuer = 0;
                 break;
+            case SDL_MOUSEBUTTONUP:
+                SDL_Surface *pierre;
+                if (k%2 == 1){
+                    pierre = IMG_Load("Images\\gonoir.png");
+                }
+                else if (k%2 == 0){
+                    pierre = IMG_Load("Images\\goblanc.png");
+                }
+                if (event.button.button == SDL_BUTTON_LEFT)
+                    continuer = 1;
+                    positiongonoir.x = event.button.x-5;
+                    positiongonoir.y = event.button.y-5;
+                    SDL_BlitSurface(pierre, NULL, ecran, &positiongonoir);
+                    SDL_Flip(ecran);
+                    k++;
+                    break;
+
+                if (event.button.button == SDL_BUTTON_RIGHT)// marche pas
+                    continuer = 1;
+                    SDL_Flip(ecran);
+                    k++;
+                    break;
         }
 
     }
@@ -94,10 +116,10 @@ int main ( int argc, char** argv ){
     positionFond.x = 0;
     positionFond.y = 0;
 
-    positiongonoir.x = 50;
-    positiongonoir.y = 50;
-    positiongoblanc.x = 60;
-    positiongoblanc.y = 50;
+    //positiongonoir.x = 50;
+    //positiongonoir.y = 50;
+    //positiongoblanc.x = 60;
+    //positiongoblanc.y = 50;
 
     Partie partie;
 
@@ -110,6 +132,9 @@ int main ( int argc, char** argv ){
     int k=0;
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
     SDL_Flip(ecran);
+    pause(positiongonoir, ecran);
+    SDL_Flip(ecran);
+    /*
     while (k<15){ // remplacer par une condition de fin de partie
         Coup coupCourrant;
         if (k%2==0){
@@ -128,19 +153,21 @@ int main ( int argc, char** argv ){
     }
 
     //Test chargement d'images PNG ET BMP dans une surface
-        //gonoir = IMG_Load("Images\\gonoir.png");
-        //goblanc= IMG_Load("Images\\goblanc.png");
-        //gonoirprison = IMG_Load("Images\\gonoir.png");
-        //goblancprison = IMG_Load("Images\\goblanc.png");
+        gonoir = IMG_Load("Images\\gonoir.png");
+        goblanc= IMG_Load("Images\\goblanc.png");
+        gonoirprison = IMG_Load("Images\\gonoir.png");
+        goblancprison = IMG_Load("Images\\goblanc.png");
 
     // On blitte par-dessus l'écran
 
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
     SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
     SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
+    */
 
-    //SDL_Flip(ecran);
-    //pause();
+    SDL_Flip(ecran);
+    pause(positiongonoir, ecran);
+    SDL_Flip(ecran);
 
     SDL_FreeSurface(imageDeFond); // On libère la surface
     SDL_Quit();
