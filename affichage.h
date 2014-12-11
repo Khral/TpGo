@@ -10,11 +10,15 @@
 
 #include <vector>
 #include <iostream>
+#include <cstdlib>
+
 #include "definitions.h"
+#include "partie.h"
 
 
 void affichagePlateau(std::vector<std::vector<Joueur> > plateau);
 
+void coupUtilisateur(Partie &partie, Joueur joueurCourant);
 
 #endif	/* AFFICHAGE_H */
 

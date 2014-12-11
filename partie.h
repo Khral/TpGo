@@ -11,7 +11,6 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <SDL_ttf.h>
 
 #include "definitions.h"
 
@@ -24,21 +23,14 @@ public:
     std::vector<std::vector<Joueur> > getPlateauFin();
     bool jouer(Coup nouveauCoup); //renvoie true si le coup est pris en compte
 
-    void coupUtilisateur(Joueur joueurCourrant); // place le coup choisi dans la liste des coups
     void retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & plateau);
     void rendrePrisonniers(int x, int y);
     int getScoreBlanc() const;
     int getScoreNoir() const;
     int getPassesConsecutifs() const;
 
-    void compterPoints(int x, int y);
+    void compterPoints();
     void compterIntersections(int x, int y);
-
-
-    // Affichage SDL
-    void clickSDL(Joueur joueurCourrant, Coup coupcourrant);
-
-
 
 private:
     bool estVivante(Coup pierre);
@@ -58,7 +50,7 @@ private:
     int intersectionBlanc=0;
     int intersectionNoir=0;
 
-    int passesConsecutifs; // Détecte la fin du jeu
+    int passesConsecutifs = 0; // Détecte la fin du jeu
 
     std::vector<Coup> interDejaTestees;
     std::vector<Coup> interCourantes;

@@ -6,8 +6,6 @@
  */
 
 
-#include <SDL.h>
-#include <SDL_image.h>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -15,8 +13,6 @@
 
 #include "definitions.h"
 #include "partie.h"
-#include "clickSDL.h"
-#include "affichageSDL.h"
 
 using namespace std;
 
@@ -45,83 +41,17 @@ int Partie::getPassesConsecutifs() const {
     return passesConsecutifs;
 }
 
-void Partie::coupUtilisateur (Joueur joueurCourrant){
-
-    // On enregistre les instructions
-    Coup Coupcourrant;
-    Coupcourrant.joueur = joueurCourrant;
-    cout << "Voulez vous passer votre tour ? O/N ";
-    char reponse;
-    cin >> reponse;
-    while ((reponse != 'O') && (reponse != 'N')){
-        cout << "Repondez avec O/N: " << endl;
-        cin >> reponse;
-    }
-    if (reponse == 'O'){
-        Coupcourrant.x=-1; // par convention
-        Coupcourrant.y=-1; // par convention
-        passesConsecutifs += 1;
-    }
-    if (reponse == 'N'){
-        bool jouable = false;
-        while (jouable == false){
-            cout << "Position du coup (en x):" ;
-            cin >> Coupcourrant.x ;
-            cout << "Position du coup (en y):" ;
-            cin >> Coupcourrant.y ;
-            jouable = jouer(Coupcourrant);
-        }
-        passesConsecutifs = 0;
-    }
-
-    // On place ces instructions dans la liste de coups
-    listeCoups.push_back(Coupcourrant);
-}
-
-
-void Partie::clickSDL(Joueur joueurCourrant, Coup nouveaucoup){
-    SDL_Event event;
-    bool continuer;
-    nouveaucoup.joueur = joueurCourrant;
-
-    while (continuer){
-        SDL_WaitEvent(&event);
-        switch(event.type){
-
-        // clavier
-            case SDL_QUIT: // si on veutbquitter
-                continuer = 0;
-                break;
-            case SDLK_SPACE: // si on veut passer
-                continuer = 1;
-                nouveaucoup.x = -1;
-                nouveaucoup.y = -1;
-                break;
-
-        // souris
-            case SDL_MOUSEBUTTONUP:
-                pos position;
-                if (event.button.button == SDL_BUTTON_LEFT) // si on veut jouer
-                    continuer = 1;
-                    position = conversionPos(event.button.x-5, event.button.y-5);
-                    nouveaucoup.x = position.xpos;
-                    nouveaucoup.y = position.ypos;
-                break;
-                if (event.button.button == SDL_BUTTON_RIGHT) // si on veut passer
-                    continuer = 1;
-                    nouveaucoup.x = -1;
-                    nouveaucoup.y = -1;
-                break;
-        }
-    }
-    listeCoups.push_back(nouveaucoup);
-}
 
 Partie::~Partie() {
 
 }
 
 bool Partie::jouer(Coup nouveauCoup) {
+    //Si on veut passer on passe
+    if(nouveauCoup.x<0 or nouveauCoup.y<0) {
+        passesConsecutifs++;
+        return true;
+    }
 
     //Si il y a déjà une pierre, on ne peut pas jouer
     if(getPlateau()[nouveauCoup.x][nouveauCoup.y]!=RIEN)
@@ -196,6 +126,7 @@ bool Partie::jouer(Coup nouveauCoup) {
             prisonniersBlanc+=prisonniersCourant;
             break;
     }
+    passesConsecutifs=0;
     listePlateaux.push_back(plateauCourant);
     return true;
 
@@ -308,21 +239,21 @@ void Partie::rendrePrisonniers(int x, int y) {
 }
 
 int Partie::getScoreBlanc() const{
-
+    void compterPoints();
     return intersectionBlanc+prisonniersBlanc;
 }
 
 int Partie::getScoreNoir() const{
-
+    void compterPoints();
     return intersectionNoir+prisonniersNoir;
 }
 
-void Partie::compterPoints(int x, int y) {
+void Partie::compterPoints() {
     intersectionBlanc = 0;
     intersectionNoir = 0;
 
-    for(int i=0; i<TAILLE;i++) {
-        for(int j=0; j<TAILLE; j++) {
+    for(int x=0; x<TAILLE;x++) {
+        for(int y=0; y<TAILLE; y++) {
             interCourantes.clear();
             compterIntersections(x, y);
 
@@ -391,7 +322,7 @@ void Partie::compterIntersections(int x, int y) {
     coupTeste.joueur = plateauFin[x][y];
 
     for(int k=0; k<TAILLE; k++){
-        if(interDejaTestees[k].x==coupTeste.x && interDejaTestees[k].y==coupTeste.y)
+        if(interDejaTestees[k].x==coupTeste.x && interDejaTestees[k].y==coupTeste.y && interDejaTestees[k].joueur == RIEN)
             return;
     }
     interCourantes.push_back(coupTeste);

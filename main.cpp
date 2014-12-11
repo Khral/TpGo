@@ -5,87 +5,34 @@
  * Created on 1 décembre 2014, 09:42
  */
 
-#define GRAPHIQUE 1
+#define GRAPHIQUE 0
 //Mettre 0 ou 1
 
 #include <cstdlib>
 
-#include <SDL.h>
-#include <SDL_image.h>
-
 #include "definitions.h"
 #include "partie.h"
-#include "affichage.h"
-#include "affichageSDL.h"
-#include "clickSDL.h"
 
-#ifdef GRAPHIQUE
-
+#if GRAPHIQUE
 #include <SDL.h>
 #include <SDL_image.h>
-
+#include "affichageSDL.h"
+#include "affichageSDL.cpp"
+#else
+#include "affichage.h"
+#include "affichage.cpp"
 #endif // GRAPHIQUE
-
 
 using namespace std;
 
 
-/* MAIN AFFICHAGE TEXTE */
-
-/*
 int main(int argc, char** argv) {
 
    //Initialisation de la partie
     Partie partie;
-    affichagePlateau(partie.getPlateau());
+    Joueur joueur = NOIR;
 
-    // Boucle de jeu
-    int k = partie.getPassesConsecutifs();
-    while (k < 2){ // remplacer par une condition de fin de partie
-        cout << "Nombre de passes: " << partie.getPassesConsecutifs() << endl;
-        if (k%2==0){
-            cout << "Au joueur noir de jouer: " ;
-            partie.coupUtilisateur(NOIR);
-            affichagePlateau(partie.getPlateau());
-        }
-        else {
-            cout << "Au joueur blanc de jouer: " ;
-            partie.coupUtilisateur(BLANC);
-            affichagePlateau(partie.getPlateau());
-        }
-        k = partie.getPassesConsecutifs();
-    }
-    return 0;
-}
-*/
-
-
-/* MAIN GRAPHIQUE TEST */
-
-
- void pause();
-
-void pause(){ // fonction déjà comprise dans clickSDL
-    int continuer = 1;
-    SDL_Event event;
-
-    while (continuer)
-    {
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                continuer = 0;
-                break;
-        }
-
-    }
-}
-
-
-
-int main ( int argc, char** argv ){
-
+    #if GRAPHIQUE
     SDL_Surface *ecran = NULL, *imageDeFond = NULL;
     SDL_Surface *goblanc = NULL, *gonoir = NULL, *goblancprison = NULL, *gonoirprison = NULL;
     SDL_Rect positionFond, positiongonoir, positiongoblanc;
@@ -94,59 +41,76 @@ int main ( int argc, char** argv ){
     positionFond.x = 0;
     positionFond.y = 0;
 
-    positiongonoir.x = 50;
-    positiongonoir.y = 50;
-    positiongoblanc.x = 60;
-    positiongoblanc.y = 50;
-
-    Partie partie;
-
     SDL_Init(SDL_INIT_VIDEO);
     ecran = SDL_SetVideoMode(WIDTH, HEIGHT, 32, SDL_HWSURFACE);
     SDL_WM_SetCaption("Jeu de Go - LIEVIN-PEILLARD-PETIT-TRESONTANI", NULL);
     imageDeFond = SDL_LoadBMP("Images\\terrain.bmp");
 
-    // Boucle de jeu
-    int k=0;
     SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
     SDL_Flip(ecran);
-    while (k<15){ // remplacer par une condition de fin de partie
-        Coup coupCourrant;
-        if (k%2==0){
-            //cout << "Au joueur noir de jouer: " ;
-            partie.clickSDL(NOIR, coupCourrant);
-            affichagePlateauSDL(partie.getPlateau(), ecran);
 
-        }
-        else {
-            //cout << "Au joueur blanc de jouer: " ;
-            partie.clickSDL(BLANC, coupCourrant);
-            affichagePlateauSDL(partie.getPlateau(), ecran);
+    #else
+    affichagePlateau(partie.getPlateau());
+    #endif // GRAPHIQUE
 
+    // Boucle de jeu
+    int k = partie.getPassesConsecutifs();
+
+    while (k < 2){ // remplacer par une condition de fin de partie
+        //Pré-affichage
+        #if GRAPHIQUE
+        #else
+        switch(joueur) {
+            case NOIR:
+                cout << "Au joueur noir de jouer: " ;
+                break;
+            case BLANC:
+                cout << "Au joueur blanc de jouer: " ;
+                break;
         }
-        k++;
+        #endif // GRAPHIQUE
+
+        //Demande de coup
+        #if GRAPHIQUE
+        clickSDL(partie, joueur);
+        #else
+        coupUtilisateur(partie, joueur);
+        #endif // GRAPHIQUE
+
+        //Ré-affichage
+        #if GRAPHIQUE
+        affichagePlateauSDL(partie.getPlateau(), ecran);
+        #else
+        affichagePlateau(partie.getPlateau());
+        #endif // GRAPHIQUE
+
+        switch(joueur) {
+            case NOIR:
+                joueur = BLANC;
+                break;
+            case BLANC:
+                joueur = NOIR;
+                break;
+        }
+
+        k = partie.getPassesConsecutifs();
     }
 
-    //Test chargement d'images PNG ET BMP dans une surface
-        //gonoir = IMG_Load("Images\\gonoir.png");
-        //goblanc= IMG_Load("Images\\goblanc.png");
-        //gonoirprison = IMG_Load("Images\\gonoir.png");
-        //goblancprison = IMG_Load("Images\\goblanc.png");
-
-    // On blitte par-dessus l'écran
-
-    SDL_BlitSurface(imageDeFond, NULL, ecran, &positionFond);
-    SDL_BlitSurface(goblanc, NULL, ecran, &positiongonoir);
-    SDL_BlitSurface(gonoir, NULL, ecran, &positiongoblanc);
-
-    //SDL_Flip(ecran);
-    //pause();
-
+    //Fin
+    #if GRAPHIQUE
     SDL_FreeSurface(imageDeFond); // On libère la surface
     SDL_Quit();
+    #else
+    cout << "C'est fini !" << endl;
+    cout << "Score NOIR : " << partie.getScoreNoir() << endl;
+    cout << "Score BLANC : " << partie.getScoreBlanc() << endl;
+    if(partie.getScoreBlanc()>partie.getScoreNoir())
+        cout << "Blanc gagne" << endl;
+    else
+        cout << "Noir gagne" << endl;
+    #endif // GRAPHIQUE
 
     return 0;
 }
-
 
 

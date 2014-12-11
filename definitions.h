@@ -8,7 +8,7 @@
 #ifndef DEFINITIONS_H
 #define	DEFINITIONS_H
 
-const int TAILLE=19;
+const int TAILLE=3;
 
 const int WIDTH = 453;
 const int HEIGHT = 453;

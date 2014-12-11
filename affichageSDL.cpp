@@ -140,3 +140,38 @@ void affichagePlateauFinSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surfa
     SDL_Flip(ecran);
 }
 
+void clickSDL(Partie &partie, Joueur joueurCourant){
+    SDL_Event event;
+    bool continuer;
+    Coup nouveauCoup;
+
+    nouveauCoup.joueur = joueurCourant;
+
+    while (continuer){
+        SDL_WaitEvent(&event);
+        switch(event.type){
+
+        // clavier
+            case SDL_QUIT: // si on veut quitter
+                continuer = 0;
+                break;
+            case SDLK_SPACE: // si on veut passer
+                continuer = 1;
+                nouveauCoup.x = -1;
+                nouveauCoup.y = -1;
+                break;
+
+        // souris
+            case SDL_MOUSEBUTTONUP:
+                pos position;
+                if (event.button.button == SDL_BUTTON_LEFT) // si on veut jouer
+                {
+                    position = conversionPos(event.button.x-5, event.button.y-5);
+                    nouveauCoup.x = position.xpos;
+                    nouveauCoup.y = position.ypos;
+                    continuer = !(partie.jouer(nouveauCoup));
+                }
+                break;
+        }
+    }
+}

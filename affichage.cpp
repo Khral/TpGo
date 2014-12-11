@@ -10,7 +10,7 @@
 using namespace std;
 
 void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
-    int i,j;
+    system("cls");
 
     for(int i=0; i<TAILLE; i++)
     {
@@ -19,11 +19,10 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
             if(plateau[i][j] == RIEN) {
                 cout << '.';
             }
-           else if(plateau[i][j]== NOIR){
+            else if(plateau[i][j]== NOIR){
                  cout <<  "N";
-           }
-
-           else if(plateau[i][j]== BLANC) {
+            }
+            else if(plateau[i][j]== BLANC) {
                 cout << "B";
             }
             else{
@@ -36,4 +35,31 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
     cout << endl;
 }
 
+void coupUtilisateur (Partie &partie, Joueur joueurCourant){
 
+    // On enregistre les instructions
+    Coup coupCourant;
+    coupCourant.joueur = joueurCourant;
+    cout << "Voulez vous passer votre tour ? O/N ";
+    char reponse;
+    cin >> reponse;
+    while ((reponse != 'O') && (reponse != 'N')){
+        cout << "Repondez avec O/N: " << endl;
+        cin >> reponse;
+    }
+    if (reponse == 'O'){
+        coupCourant.x=-1; // par convention
+        coupCourant.y=-1; // par convention
+        partie.jouer(coupCourant);
+    }
+    if (reponse == 'N'){
+        bool jouable = false;
+        while (jouable == false){
+            cout << "Position du coup (en x):" ;
+            cin >> coupCourant.x ;
+            cout << "Position du coup (en y):" ;
+            cin >> coupCourant.y ;
+            jouable = partie.jouer(coupCourant);
+        }
+    }
+}

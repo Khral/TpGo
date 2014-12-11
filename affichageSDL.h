@@ -11,9 +11,10 @@
 
 #include <vector>
 #include <iostream>
-#include "definitions.h"
 #include <SDL.h>
 #include <SDL_image.h>
+
+#include "definitions.h"
 
 struct pos {
     int xpos;
@@ -31,5 +32,7 @@ pos conversionPos(int xin, int yin);
 void affichagePlateauFinSDL(std::vector<std::vector<Joueur> > plateau, SDL_Surface *ecran);
 // affichage du plateau de fin avec les prisonniers
 
+
+void clickSDL(Partie &partie, Joueur joueurCourant);
 
 #endif	/* AFFICHAGESDL_H */
