@@ -205,15 +205,21 @@ void Partie::retirerGroupe(int x, int y, std::vector<std::vector<Joueur> > & pla
 }
 
 bool Partie::testKo(vector<vector<Joueur> > plateau){
-    for(int k=0;k<listePlateaux.size();k++){
-        for(int i=0; i<TAILLE;i++) {
-            for(int j=0;j<TAILLE;j++) {
+    int i,j,k;
+    bool plateauOk = false; 
+    for(k=0;k<listePlateaux.size();k++){
+        for(i=0; i<TAILLE;i++) {
+            for(j=0;j<TAILLE;j++) {
                 if(listePlateaux[k][i][j]!=plateau[i][j])
-                    return false;
+                    plateauOk = true; 
             }
         }
+        if(plateauOk)
+            plateauOk = false;
+        else
+            return true;
     }
-    return true;
+    return false;
 }
 
 
