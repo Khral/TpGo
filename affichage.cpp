@@ -10,7 +10,7 @@
 using namespace std;
 
 void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
-    system("cls");
+    clear_screen();
 
     for(int i=0; i<TAILLE; i++)
     {
@@ -34,6 +34,18 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau){
     cout << endl;
     cout << endl;
 }
+
+
+void clear_screen()
+{
+#ifdef WINDOWS
+    std::system("cls");
+#else
+    // Assume POSIX
+    std::system ("clear");
+#endif
+}
+
 
 void coupUtilisateur (Partie &partie, Joueur joueurCourant){
 

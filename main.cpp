@@ -8,9 +8,8 @@
 #define GRAPHIQUE 0
 //Mettre 0 ou 1
 
-#include "windows.h"
-#include "gtest\gtest.h"
 #include <cstdlib>
+#include "gtest/gtest.h"
 
 #include "definitions.h"
 #include "partie.h"
@@ -26,7 +25,6 @@
 #endif // GRAPHIQUE
 
 using namespace std;
-
 
 
 int main(int argc, char** argv) {
@@ -114,12 +112,12 @@ int main(int argc, char** argv) {
     else
         cout << "Noir gagne" << endl;
     #endif // GRAPHIQUE
-	system("pause");
+    cin;
 	::testing::InitGoogleTest(&argc, argv);
-	
+
 
     return RUN_ALL_TESTS();
-	
+
 }
 
 

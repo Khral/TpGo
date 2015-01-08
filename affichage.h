@@ -20,5 +20,7 @@ void affichagePlateau(std::vector<std::vector<Joueur> > plateau);
 
 void coupUtilisateur(Partie &partie, Joueur joueurCourant);
 
+void clear_screen();
+
 #endif	/* AFFICHAGE_H */
 
